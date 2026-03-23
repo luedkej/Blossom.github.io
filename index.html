@@ -113,10 +113,26 @@
             });
         }
 
+        // Cycle through audio tracks with Shift+Enter
+        const tracks = [
+            'https://luedkej.github.io/Blossom.github.io/IDK_you_yet.mp4',
+            'https://luedkej.github.io/Blossom.github.io/audio_2.mp4',
+            'https://luedkej.github.io/Blossom.github.io/te_iwi_eh.mp4'
+        ];
+        let currentTrack = 0;
+
         // Add event listener to play audio when the space key is pressed
         window.addEventListener('keydown', function(event) {
             if (event.code === 'Space') {
                 playAudio();
+            }
+            if (event.shiftKey && event.code === 'Enter') {
+                const audio = document.getElementById('background-audio');
+                currentTrack = (currentTrack + 1) % tracks.length;
+                audio.src = tracks[currentTrack];
+                audio.play().catch(error => {
+                    console.error('Audio playback failed:', error);
+                });
             }
         });
     </script>
